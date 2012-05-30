@@ -1,6 +1,7 @@
 var http = require("http");
 var fs = require('fs');
 var url = require('url');
+var less = require('less');
 exports.config = {};
 
 exports.setConfig = function(config){
@@ -31,24 +32,31 @@ exports.startServer = function(port){
     if(view === undefined){
       view = exports.errorView;
     }
-    res.end(view(params));
+    //渡す値はオブジェクト化したい
+    view(req,res,params);
   }).listen(port);
 };
 
 //index page
-exports.indexView = function(){
+exports.indexView = function(req,res){
   var tpl = fs.readFileSync("./server/index.html");
-  return tpl;
+  res.end(tpl);
 };
 
 //css page
-exports.cssView = function(params){
+exports.cssView = function(req,res,params){
   var name = params[1];
-  console.log(exports.config.directory);
-  return "css"+name;
+  var parser = new(less.Parser)({
+    paths : [exports.config.directory]
+  })
+  var data = fs.readFileSync(exports.config.directory + name);
+  parser.parse(data.toString(),function(error,tree){
+    var css = tree.toCSS({});
+    res.end(css);
+  })
 };
 
 //error page
-exports.errorView = function(){
-  return "error";
+exports.errorView = function(req,res,param){
+  return req.end("error");
 };

@@ -1,3 +1,6 @@
-var server = require("./lib/server.js");
-
+var server = require("./server");
+var conf = {
+  "directory" : "./test/less/"
+};
+server.setConfig(conf);
 server.startServer(8910);
