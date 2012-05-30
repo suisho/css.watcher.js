@@ -14,7 +14,7 @@ results
 node_modules
 npm-debug.log
 
-.hg*
+*.hg*
 *.sublime*
 *.komodoproject
 .nide
