@@ -17,6 +17,7 @@ npm-debug.log
 *.hg*
 .hgignore
 *.sublime*
+.npmignore*
 *.komodoproject
 .nide
 start.bat

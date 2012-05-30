@@ -1,6 +1,0 @@
-.nide
-.git*
-.hg*
-*.komodo*
-*.sublime*
-node_module
