@@ -12,6 +12,7 @@ exports.start = function(){
     if(event.isDelete()){
       return;
     }
+    
     try{
       change(event.name);
     }catch(e){
@@ -21,6 +22,6 @@ exports.start = function(){
 }
 
 function change(file){
-  var a = fs.readFileSync(event.name,'utf8');
+  var a = fs.readFileSync(file,'utf8');
   exports.changeCallback(file);
 }
