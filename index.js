@@ -6,9 +6,13 @@ var conf = {
   "directory" : "./debug/less/"
 };
 
-//var watcher = new Watcher(conf.directory);
-watcher.directory = conf.directory;
-watcher.start();
 server.setConfig(conf);
 server.startServer(8910);
 socket.init(8911);
+
+//var watcher = new Watcher(conf.directory);
+watcher.directory = conf.directory;
+watcher.start();
+watcher.changeCallback = function(){
+  //socket.
+}
