@@ -1,10 +1,21 @@
 var socket_io = require('socket.io');
-exports.init = function(){
-  var io = socket_io.listen(8911);
+var io;
+
+exports._socket;
+exports.init = function(port){
+  io = socket_io.listen(8911);
+  io.set("origin","*");
   io.sockets.on('connection', function (socket) {
-    socket.emit('less_refresh', { hello: 'world' });
-    socket.on('my other event', function (data) {
-      ////console.log(data);
-    });
+    exports._socket = socket;
+    socket.broadcast.emit('init', { hello: 'world' });
   });
 }
+
+//とりあえずデータは飛んでるけども・・・
+exports.lessChange = function(file){
+  exports._socket.emit('less_refresh', { file : file });
+  /*io.sockets.on('connection', function (socket) {
+    console.log("file");
+    socket.broadcast.emit('less_refresh', { file : file });
+  });*/
+} 

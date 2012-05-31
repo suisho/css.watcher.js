@@ -12,7 +12,7 @@ socket.init(8911);
 
 //var watcher = new Watcher(conf.directory);
 watcher.directory = conf.directory;
-watcher.start();
-watcher.changeCallback = function(){
-  //socket.
+watcher.changeCallback = function(file){
+  socket.lessChange(file);
 }
+watcher.start();
