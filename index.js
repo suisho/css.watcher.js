@@ -1,9 +1,14 @@
+var watcher = require('./watcher');
 
 var server = require("./server");
 var socket = require("./server/socket.js");
 var conf = {
-  "directory" : "./test/less/"
+  "directory" : "./debug/less/"
 };
+
+//var watcher = new Watcher(conf.directory);
+watcher.directory = conf.directory;
+watcher.start();
 server.setConfig(conf);
 server.startServer(8910);
 socket.init(8911);
