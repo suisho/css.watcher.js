@@ -15,6 +15,7 @@ exports.startServer = function(port){
     try{
       var router = {
         '\/(le|c)ss\/(.*)' : exports.cssView,
+        '\/sample' : exports.sampleView,
         '\/?$' : exports.indexView
       };
       //routing
@@ -46,6 +47,11 @@ exports.startServer = function(port){
 //index page
 exports.indexView = function(req,res){
   var tpl = fs.readFileSync("server/index.html");
+  res.end(tpl);
+};
+
+exports.sampleView = function(req,res){
+  var tpl = fs.readFileSync("server/sample.html");
   res.end(tpl);
 };
 
