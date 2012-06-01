@@ -2,6 +2,7 @@ var http = require("http");
 var fs = require('fs');
 var url = require('url');
 var less = require('less');
+var server = null;
 exports.config = {};
 
 exports.setConfig = function(config){
@@ -11,7 +12,7 @@ exports.setConfig = function(config){
 //server起動
 exports.startServer = function(port){
   console.log("start server");
-  http.createServer(function(req, res){
+  server = http.createServer(function(req, res){
     try{
       var router = {
         '\/(le|c)ss\/(.*)' : exports.cssView,
@@ -42,6 +43,7 @@ exports.startServer = function(port){
       exports.errorView(req,res,e);
     }
   }).listen(port);
+  exports.initSocket(server);
 };
 
 //index page
@@ -84,4 +86,26 @@ exports.errorView = function(req,res,e){
   }
   return res.end(error);
 };
+
+
+//socket
+var socket_io = require('socket.io');
+var io;
+
+
+exports.lessChange = function(){
+  console.error("this function is not already prepare");
+};
+exports.initSocket = function(server){
+  io = socket_io.listen(server);
+  io.set("origin","*");
+  io.sockets.on('connection', function (socket) {
+    socket.broadcast.emit('init', { hello: 'world' });
+    //add lessChange function
+    exports.lessChange = function(file){
+      socket.emit('less_refresh', { file : file });
+    }
+  });
+}
+
 
