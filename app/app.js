@@ -38,6 +38,7 @@ app.configure('production', function(){
 // Routes
 
 app.get('/less/:name', routes.less);
+app.get('/client.js', routes.client);
 app.get('/', routes.index);
 
 var socket = require("./socket.js");
