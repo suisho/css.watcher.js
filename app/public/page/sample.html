@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="http://localhost:8910/less/item.less"></style>
+    <!--link rel="stylesheet" href="http://localhost:8910/css/i2.css"></style-->
+    <!--script src="http://localhost:8910/occhan.js"></script-->
+    <script src="http://localhost:8910/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect('http://localhost:8910');
+      socket.on('less_refresh', function (data) {
+        console.log(data);
+        socket.emit('polling', { my: 'data' });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="foo">
+      <div class="hoge">
+      socketted
+      </div>
+    </div>
+  </body>
+</html>

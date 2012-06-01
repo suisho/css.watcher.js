@@ -1,0 +1,9 @@
+{
+  "less_directory" : "./debug/less",
+  "css_covert" : {
+    "enable" : true,
+    "from" : ".less",
+    "to" : ".css"
+  },
+  "less_env" : {}
+}

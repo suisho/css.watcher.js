@@ -1,17 +1,10 @@
-var watcher = require('./watcher');
-
-var server = require("./server");
-
 var conf = {
   "directory" : "./debug/less/"
 };
 
-server.setConfig(conf);
-server.startServer(8910);
+//start server
+var app = require("./app/app.js");
+app.listen(8910,function(){
+  console.log("start server");
+});
 
-//var watcher = new Watcher(conf.directory);
-watcher.directory = conf.directory;
-watcher.changeCallback = function(file){
-  socket.lessChange(file);
-}
-watcher.start();
