@@ -3,8 +3,7 @@ var socket_io = require('socket.io');
 
 var io = null;
 exports.lessChange = function(file){
-  console.log(io.sockets);
-  io.sockets.emit('less_refresh', { file : file });
+  io.sockets.emit('less_refresh', { file : file , time : new Date()});
 };
 
 exports.listen = function(server){
