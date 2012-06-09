@@ -22,4 +22,5 @@ npm-debug.log
 .nide
 start.bat
 *.ign
+debug/*
 
