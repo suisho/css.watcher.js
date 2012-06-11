@@ -1,5 +1,5 @@
+// reloader
 var socket = io.connect('http://localhost:8910');
-//とりあえずテスト的にjquery依存してるけど読み込むものなので辞めたい
 socket.proceceed = {}
 socket.on('less_refresh', function (data) {
   var links = document.getElementsByTagName("link");

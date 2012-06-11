@@ -1,3 +1,4 @@
+#!/usr/bin/node 
 var fs = require('fs');
 var http = require('http');
 
@@ -25,6 +26,9 @@ exports.less = function(req, res){
   })
 };
 
+/**
+ *  return client source
+ */
 exports.client = function(req,res){
   var host = "localhost";
   var port = 8910;
@@ -32,7 +36,18 @@ exports.client = function(req,res){
                 port : port,
                 path : "/socket.io/socket.io.js",
                 method : "GET"}
-  var r = http.get(option, function(_response){
-    res.send(_response);
+  var source ="";
+  var reloader = fs.readFileSync("app/public/js/socket.js");
+  //socket.io.jsのソースを取得
+  http.get(option, function(_response){
+    var body = ""
+    _response.on('data', function(data) {
+      body += data;
+    });
+    _response.on('end', function() {
+      source += body;
+      source += reloader;
+      res.send(source);
+    });
   });
 }
