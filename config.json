@@ -1,5 +1,5 @@
 {
-  "less_directory" : "./debug/less",
+  "less_directory" : "C:\\data\\nico_seiga\\svn\\deployed\\app_front\\htdocs\\css",
   "css_covert" : {
     "enable" : true,
     "from" : ".less",
